@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  webserver:
+    build: ./docker/webserver
+    image: runwaytest_web
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /Users/mattopolitan/Projects/projectc1/www:/var/www/html
+    links:
+      - db
+
+  db:
+    image: mysql:5.7
+    ports: 
+      - "3306:3306"
+    volumes:
+      - ./db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=projectc1
+      - MYSQL_DATABASE=db_projectc1
